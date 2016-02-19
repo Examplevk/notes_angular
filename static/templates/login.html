@@ -1,0 +1,16 @@
+<div id="Login-panel" class=" col-xs-4 col-xs-offset-4">
+    <form  novalidate>
+        <div class="form-group">
+            <label for="exampleInputName">User name</label>
+            <input type="text" ref="name-input" ng-model="loginData.username" name="username" class="form-control" id="exampleInputName" placeholder="User name"/>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" ref="password-input" ng-model="loginData.password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
+        </div>
+        <div class="invalid-login" ng-show="showLoginErr">Incorrect password or login</div>
+        <div class="register-success" ng-show="showRegisterSuccess" ng-click="register()">Register success, please, log in</div>
+        <button class="btn btn-default btn-login" ng-click="login()">Log in</button>
+        <button class="btn btn-default btn-login" ng-show="showRegisterBtn" ng-click="register()">Register</button>
+    </form>
+</div>

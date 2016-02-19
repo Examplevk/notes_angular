@@ -1,0 +1,18 @@
+{{note}}
+<a href="/logout">Log out</a>
+
+        <div class="todoactive clear-fix" ng-repeat="note in notes" ng-mouseenter="mouseEnterOnTodoActive()">
+            <button class='btn btn-default btn-xs btnDelete' ng-show="showBtnDelete" ng-click="deleteNote(note)">x</button>
+            <div class='note'>
+                <span>{{note.text}}</span>
+            </div>
+            <!--<div className="changeColor" onMouseEnter={()=>{this.changePaletteVisibility(true)}} onMouseLeave={()=>{this.changePaletteVisibility(false)}}></div>-->
+            <!--<div className="clock" data-title={'Expire at: '+date}></div>-->
+            <!--<div className="shared" data-toggle="modal" data-target={'#'+this.props.index}></div>-->
+        </div>
+
+        <!--<div className={(this.state.visible) ? 'edit-panel' : 'hidden'}>-->
+            <!--<textarea ref="todo-edit" className={(this.state.visible) ? 'editArea' : 'hidden'} cols="20" rows="3" defaultValue={this.props.todo.text}/>-->
+            <!--<input type="submit" className="btn btn-default" data-color={this.state.noteColor} onClick={this.handleEdit} value="Edit"/>-->
+            <!--<input type="submit" className="btn btn-default" onClick={()=>{this.changeVisibility(false)}} value="Cancel"/>-->
+        <!--</div>-->
