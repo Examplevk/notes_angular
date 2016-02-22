@@ -61,7 +61,7 @@ router.post('/deletenote', function(req,res){
 router.post('/editnote', function(req, res){
     let _id =  ObjectID(req.body._id);
     let text = req.body.text;
-    let color = '#'+req.body.color;
+    let color = req.body.color;
     let id = Number(req.body.id);
 
     collection.updateOne({_id: _id},{$set:{text: text, color: color}}, function(err,result){

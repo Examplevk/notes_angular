@@ -1,15 +1,37 @@
 {{note}}
 <a href="/logout">Log out</a>
+      <div class="container">
+        <div class="inputForm col-xs-4 col-xs-offset-4">
+            <div class="col-xs-4 col-xs-offset-4">
+                <div ng-click="showAddPanel()"><textarea cols="34" rows="3" placeholder="Add note" ng-model="text"></textarea></div>
+        <div ng-show="showAddForm">
+            <input type="date" placeholder="expire time" ng-model="date" />
+            <input type="submit" class="btn btn-default inputButton" value="OK!" ng-click="addNote()"/>
+            <input type="submit" class="btn btn-default inputButton" value="Cancel" ng-click="hideAddPanel()"/>
+        </div>
+        </div>
+        </div>
 
         <div class="todoactive clear-fix" ng-repeat="note in notes" ng-mouseenter="mouseEnterOnTodoActive()">
             <button class='btn btn-default btn-xs btnDelete' ng-show="showBtnDelete" ng-click="deleteNote(note)">x</button>
-            <div class='note'>
-                <span>{{note.text}}</span>
+            <div class='note' ng-controller="NoteCtrl" ng-style="{'background-color': note.color}">
+                <span ng-click="">{{note.text}}</span>
+                <div class='palette' ng-show="showPalette" ng-mouseenter="changePaletteVisibility(true)" ng-mouseleave="changePaletteVisibility(false)">
+                    <div class="color" id="color-1" ng-click="note.color = '#fff'; changeColor('#fff', note)"></div>
+                    <div class="color" id="color-2" ng-click="note.color = '#ddddcd'; changeColor('#ddddcd', note)"></div>
+                    <div class="color" id="color-3" ng-click="note.color = '#edd151'; changeColor('#edd151', note)"></div>
+                    <div class="color" id="color-4" ng-click="note.color = '#a9bfd4'; changeColor('#a9bfd4', note)"></div>
+                    <div class="color" id="color-5" ng-click="note.color = '#f1ee61'; changeColor('#f1ee61', note)"></div>
+                    <div class="color" id="color-6" ng-click="note.color = '#bc5995'; changeColor('#bc5995', note)"></div>
+                    <div class="color" id="color-7" ng-click="note.color = '#caefb3'; changeColor('#caefb3', note)"></div>
+                    <div class="color" id="color-8" ng-click="note.color = '#5dd3e9'; changeColor('#5dd3e9', note)"></div>
+                </div>
+                <div class="changeColor" ng-mouseenter="changePaletteVisibility(true)" ng-mouseleave="changePaletteVisibility(false)"></div>
+                <div class="clock" data-title={{getExpireTime(note)}}></div>
+                <div class="shared" data-toggle="modal" data-target={'#'+this.props.index}></div>
             </div>
-            <!--<div className="changeColor" onMouseEnter={()=>{this.changePaletteVisibility(true)}} onMouseLeave={()=>{this.changePaletteVisibility(false)}}></div>-->
-            <!--<div className="clock" data-title={'Expire at: '+date}></div>-->
-            <!--<div className="shared" data-toggle="modal" data-target={'#'+this.props.index}></div>-->
         </div>
+      </div>
 
         <!--<div className={(this.state.visible) ? 'edit-panel' : 'hidden'}>-->
             <!--<textarea ref="todo-edit" className={(this.state.visible) ? 'editArea' : 'hidden'} cols="20" rows="3" defaultValue={this.props.todo.text}/>-->
