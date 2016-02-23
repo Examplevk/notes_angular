@@ -106,12 +106,12 @@ router.post('/getallusers', function(req, res){
                     })
                 })
             }))
-        ).then(data =>  {console.log(data); res.send(data)}).catch(err => console.log(err))
+        ).then(data =>  {res.send(data)}).catch(err => console.log(err))
 
     })
 })
 router.post('/addusertonote', function(req, res){
-    let id_user = req.body.id_user;
+    //let id_user = req.body.id_user;
     let _id_user = ObjectID(req.body._id_user);
     let _id_note = ObjectID(req.body._id_note);
     console.log('Code in ADDusernote',_id_note);
@@ -126,14 +126,36 @@ router.post('/addusertonote', function(req, res){
             collection.updateOne({_id: _id_note},{ $set: {"users": usersArray}}, function(err, results){
                 if(err) throw err;
 
-                res.json( {id: id_user, note_id: _id_note});
+                res.json({ note_id: _id_note});
             });
-
-
         }
     })
 })
+router.post('/deleteuserfromnote', function(req, res){
+    //let id_user = req.body.id_user;
+    let _id_user = ObjectID(req.body._id_user);
+    let _id_note = ObjectID(req.body._id_note);
+    console.log('Code in DELETEusernote',_id_note);
+    collection.find({_id: _id_note}).each(function(err,doc){
+        if (err) {
+            throw err;
+        }
+        if(doc != null) {
+            let users = doc.users;
+            let newUsers = [];
+            for(let i = 0; i < users.length; i++){
+                console.log(users[i], _id_user);
+                if(users[i].toString() !=  _id_user.toString()) newUsers.push(ObjectID(users[i]));
+            }
+            console.log(newUsers);
+            collection.updateOne({_id: _id_note}, { $set: { users:  newUsers} }, function(err, result){
+                    if(err) throw err;
 
+                    res.send(newUsers);
+                })
+        }
+    })
+})
 
 
 module.exports = router;
