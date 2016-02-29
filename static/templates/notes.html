@@ -1,18 +1,20 @@
 {{note}}
 <a href="/logout">Log out</a>
       <div class="container">
-        <div class="inputForm col-xs-4 col-xs-offset-4">
+        <div class="inputForm col-xs-4 col-xs-offset-4" input-directive>
             <div class="col-xs-4 col-xs-offset-4">
-                <div ng-click="showAddPanel()"><textarea cols="34" rows="3" placeholder="Add note" ng-model="text"></textarea></div>
-        <div ng-show="showAddForm">
-            <input type="date" placeholder="expire time" ng-model="date" />
-            <input type="submit" class="btn btn-default inputButton" value="OK!" ng-click="addNote()"/>
-            <input type="submit" class="btn btn-default inputButton" value="Cancel" ng-click="hideAddPanel()"/>
-        </div>
-        </div>
+                <div ng-click="showAddPanel()">
+                    <textarea cols="34" rows="3" placeholder="Add note" ng-model="text"></textarea>
+                </div>
+                <div ng-show="showAddForm">
+                    <input type="date" placeholder="expire time" ng-model="date" />
+                    <input type="submit" class="btn btn-default inputButton" value="OK!" ng-click="addNote()"/>
+                    <input type="submit" class="btn btn-default inputButton" value="Cancel" ng-click="hideAddPanel()"/>
+                </div>
+            </div>
         </div>
 
-        <div class="todoactive clear-fix" ng-repeat="note in notes" ng-mouseenter="mouseEnterOnTodoActive()" ng-controller="NoteCtrl">
+        <div class="todoactive clear-fix" ng-repeat="note in notes" ng-mouseenter="mouseEnterOnTodoActive()" ng-controller="NoteCtrl" note-directive>
             <button class='btn btn-default btn-xs btnDelete' ng-show="showBtnDelete" ng-click="deleteNote(note)">x</button>
             <div class='note' ng-style="{'background-color': note.color}" ng-hide="showEditPanel">
                 <span ng-click="toggleEditPanel(true)">{{note.text}}</span>

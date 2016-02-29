@@ -1,4 +1,4 @@
-var notesApp = angular.module('notesApp', ['ngRoute', 'notesControllers', 'notesApp.autorizationProvider', 'notesApp.dataProvider']);
+var notesApp = angular.module('notesApp', ['ngRoute', 'notesControllers', 'notesApp.autorizationProvider', 'notesApp.dataProvider', 'noteDirectives']);
 
 notesApp.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
