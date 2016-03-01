@@ -1,4 +1,6 @@
- angular.module('notesApp.autorizationProvider', []).provider('autorization',[function () {
+import angular from 'angular';
+
+ export default angular.module('autorizationProvider', []).provider('autorization',[function () {
 
     var LOGIN_URL = 'http://localhost:3000/autoriz';
 

@@ -63,6 +63,9 @@
     right: 0px;
     display: none;
 }
+.todoactive:hover .btnDelete {
+    display: block;
+}
 .changeColor{
     position: absolute;
     width: 15px;
@@ -109,12 +112,16 @@
     position: absolute;
     width: 105px;
     height: 55px;
-    bottom: 20px;
-    left: 61px;
+    bottom: 0;
     border: 1px solid black;
     background-color: #fff;
-    display: block;
+    display: none;
     border-radius: 4px;
+    z-index: 1;
+    right: 0;
+}
+.changeColor:hover .palette {
+    display: block;
 }
 .color{
     float: left;
@@ -183,4 +190,8 @@
 }
 .modal-body{
     text-align: left;
+}
+.wrap-note{
+    float: left;
+    width: 200px;
 }

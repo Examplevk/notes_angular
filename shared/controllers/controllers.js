@@ -1,5 +1,8 @@
 
-var notesControllers = angular.module('notesControllers', []);
+import angular from 'angular';
+
+
+let notesControllers =   angular.module('notesControllers', []);
 
 notesControllers.controller('LoginCtrl', ['$scope', '$http', '$location', 'autorization',
     function($scope, $http, $location, autorization) {
@@ -97,23 +100,36 @@ notesControllers.controller('NotesCtrl', ['$scope', '$http', 'data',
 
         $scope.deleteUserFromNote = function(userId, noteId){
             data.deleteUserFromNote(userId, noteId).success((data)=>{
-
+                var newNotes = [];
                 for(var i = 0; i < $scope.notes.length; i++){
-                    if($scope.notes[i]._id == noteId){
-                        $scope.notes[i].users = data;
+                    if($scope.notes[i]._id != noteId){
+                       // $scope.notes[i].users = data;
+                        newNotes.push($scope.notes[i]);
+                    }else {
+                        $(".modal-backdrop").hide();
                     }
                 }
+                $scope.notes = newNotes;
 
+               $scope.$apply();
             }).error(function(data) {
                 console.log('Error: ' + data);
             });
         }
+        $scope.checkUser = function(user, note_id){
+            console.log('in checkuser');
+            for(var i = 0; i < $scope.notes.length; i++){
+                if($scope.notes[i]._id == note_id){
+                    if(user._id == $scope.notes[i].user) return false;
+                    for (var k = 0; k < $scope.notes[i].users.length; k++){
+                        if($scope.notes[i].users[k] == user._id) return true;
+                    }
+                }
+            }
+            return false;
+        }
 
     }]);
-notesControllers.controller('NoteCtrl', ['$scope',
-    function($scope){
-        $scope.showPalette = false;
-        $scope.showEditPanel = false;
-        $scope.showBtnDelete = false;
 
-    }]);
+
+export default notesControllers;

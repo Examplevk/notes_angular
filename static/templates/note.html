@@ -1,0 +1,46 @@
+<div class="todoactive clear-fix">
+    <button class='btn btn-default btn-xs btnDelete' ng-click="deleteNote()">x</button>
+    <div class='note' ng-style="{'background-color': note.color}" ng-hide="editMode">
+        <span ng-click="edit()">{{note.text}}</span>
+        <div class="changeColor">
+            <div class='palette'>
+                <div class="color" id="color-1" ng-click="setColor('#fff')"></div>
+                <div class="color" id="color-2" ng-click="setColor('#ddddcd')"></div>
+                <div class="color" id="color-3" ng-click="setColor('#edd151')"></div>
+                <div class="color" id="color-4" ng-click="setColor('#a9bfd4')"></div>
+                <div class="color" id="color-5" ng-click="setColor('#f1ee61')"></div>
+                <div class="color" id="color-6" ng-click="setColor('#bc5995')"></div>
+                <div class="color" id="color-7" ng-click="setColor('#caefb3')"></div>
+                <div class="color" id="color-8" ng-click="setColor('#5dd3e9')"></div>
+            </div>
+        </div>
+        <div class="clock" data-title={{expireTime}}></div>
+        <div class="shared" data-toggle="modal" data-target={{'#'+note._id}}></div>
+    </div>
+    <div class='modal fade' id={{note._id}} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Shared users</h4>
+                </div>
+                <div class="modal-body">
+                    <p ng-repeat="user in users" ng-show="isUsersNote(user, note)">
+                        {{user.username}}
+                        <input type="submit" class="btn btn-default" value="Add" ng-hide="checkUser(user, note._id)" ng-click="addUserToNote(user._id, note._id)"/>
+                        <input type="submit" class="btn btn-default" value="Delete" ng-show="checkUser(user, note._id)" ng-click="deleteUserFromNote(user._id, note._id)"/>
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="edit-panel" ng-show="editMode">
+        <textarea ref="todo-edit" class="editArea" cols="20" rows="3" ng-model="note.text">{{note.text}}</textarea>
+        <input type="submit" class="btn btn-default" ng-click="editNote()" value="Edit"/>
+        <input type="submit" class="btn btn-default" ng-click="cancel()" value="Cancel"/>
+    </div>
+</div>

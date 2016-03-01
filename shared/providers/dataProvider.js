@@ -1,4 +1,6 @@
-angular.module('notesApp.dataProvider', []).provider('data', [function () {
+import angular from 'angular';
+
+ export  default angular.module('dataProvider', []).provider('data', [function () {
 
     var DATA_URL = 'http://localhost:3000/data';
 
@@ -30,6 +32,9 @@ angular.module('notesApp.dataProvider', []).provider('data', [function () {
             },
             addNote: function(date, text){
               return $http.post(DATA_URL+'/createnote', {expire_time: date, text: text});
+            },
+            updateNote(note) {
+                return $http.post(DATA_URL + '/editnote', note)
             },
             editNote: function(color, note){
                 return $http.post(DATA_URL+'/editnote', {_id: note._id, text: note.text, color: color});
